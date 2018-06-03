@@ -8,6 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Open working directory" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="158" Click="OpenWorkingFolderButton_Click"/>
+        <Image Name="SourceImage" HorizontalAlignment="Left" Height="240" Margin="10,82,0,0" VerticalAlignment="Top" Width="240" Stretch="Fill"/>
+        <Slider Name="OriginSouceSlider" HorizontalAlignment="Left" Margin="10,351,0,0" VerticalAlignment="Top" Width="240" ValueChanged="OriginSourceSlider_ValueChanged" TickPlacement="TopLeft" Cursor="Hand" SmallChange="1" AutoToolTipPlacement="TopLeft"/>
 
     </Grid>
 </Window>

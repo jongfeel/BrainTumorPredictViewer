@@ -1,6 +1,8 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +23,8 @@ namespace BrainTumorPredictViewer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private FileInfo[] originImageInfo = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +38,25 @@ namespace BrainTumorPredictViewer
 
             if (result == CommonFileDialogResult.Ok)
             {
-                MessageBox.Show(dialog.FileName);
+                Debug.WriteLine(dialog.FileName);
+
+                DirectoryInfo dirInfo = new DirectoryInfo(dialog.FileName);
+
+                originImageInfo = dirInfo.GetFiles("*.png").OrderBy(f => int.Parse( System.IO.Path.GetFileNameWithoutExtension (f.Name))).ToArray();
+
+                var uriSource = new Uri(originImageInfo[0].FullName, UriKind.RelativeOrAbsolute);
+                SourceImage.Source = new BitmapImage(uriSource);
+
+                OriginSouceSlider.Maximum = originImageInfo.Length;
+            }
+        }
+
+        private void OriginSourceSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (originImageInfo != null && originImageInfo.Length > e.NewValue && (int)e.OldValue != (int)e.NewValue)
+            {
+                var uriSource = new Uri(originImageInfo[(int)e.NewValue].FullName, UriKind.RelativeOrAbsolute);
+                SourceImage.Source = new BitmapImage(uriSource);
             }
         }
     }
