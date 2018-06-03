@@ -24,5 +24,10 @@ namespace BrainTumorPredictViewer
         {
             InitializeComponent();
         }
+
+        private void OpenWorkingFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
