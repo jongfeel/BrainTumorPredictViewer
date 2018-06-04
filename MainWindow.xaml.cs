@@ -24,6 +24,7 @@ namespace BrainTumorPredictViewer
     public partial class MainWindow : Window
     {
         private FileInfo[] originImageInfo = null;
+        private BitmapImage[] loadedImages = null;
 
         public MainWindow()
         {
@@ -32,6 +33,9 @@ namespace BrainTumorPredictViewer
 
         private void OpenWorkingFolderButton_Click(object sender, RoutedEventArgs e)
         {
+            // Winform folder dialog 사용 하지 않음
+            // Windows 7 이후 API 호출해서 사용
+            // nuget package 설치함: WindowsAPICodePack
             var dialog = new CommonOpenFileDialog();
             dialog.IsFolderPicker = true;
             CommonFileDialogResult result = dialog.ShowDialog();
@@ -40,14 +44,16 @@ namespace BrainTumorPredictViewer
             {
                 Debug.WriteLine(dialog.FileName);
 
-                DirectoryInfo dirInfo = new DirectoryInfo(dialog.FileName);
-
+                var dirInfo = new DirectoryInfo(dialog.FileName);
+                
                 originImageInfo = dirInfo.GetFiles("*.png").OrderBy(f => int.Parse( System.IO.Path.GetFileNameWithoutExtension (f.Name))).ToArray();
 
                 var uriSource = new Uri(originImageInfo[0].FullName, UriKind.RelativeOrAbsolute);
                 SourceImage.Source = new BitmapImage(uriSource);
 
                 OriginSouceSlider.Maximum = originImageInfo.Length;
+
+                loadedImages = new BitmapImage[originImageInfo.Length];
             }
         }
 
@@ -55,8 +61,18 @@ namespace BrainTumorPredictViewer
         {
             if (originImageInfo != null && originImageInfo.Length > e.NewValue && (int)e.OldValue != (int)e.NewValue)
             {
-                var uriSource = new Uri(originImageInfo[(int)e.NewValue].FullName, UriKind.RelativeOrAbsolute);
-                SourceImage.Source = new BitmapImage(uriSource);
+                if (loadedImages[(int)e.NewValue] != null)
+                {
+                    SourceImage.Source = loadedImages[(int)e.NewValue];
+                }
+                else
+                {
+                    var uriSource = new Uri(originImageInfo[(int)e.NewValue].FullName, UriKind.RelativeOrAbsolute);
+                    loadedImages[(int)e.NewValue] = new BitmapImage(uriSource);
+                    SourceImage.Source = loadedImages[(int)e.NewValue];
+
+                    Debug.WriteLine(uriSource);
+                }
             }
         }
     }
