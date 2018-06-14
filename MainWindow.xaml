@@ -5,11 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrainTumorPredictViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <Button Content="Open working directory" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="158" Click="OpenWorkingFolderButton_Click"/>
-        <Image Name="SourceImage" HorizontalAlignment="Left" Height="240" Margin="10,82,0,0" VerticalAlignment="Top" Width="240" Stretch="Fill"/>
-        <Slider Name="OriginSouceSlider" HorizontalAlignment="Left" Margin="10,351,0,0" VerticalAlignment="Top" Width="240" ValueChanged="OriginSourceSlider_ValueChanged" TickPlacement="TopLeft" Cursor="Hand" SmallChange="1" AutoToolTipPlacement="TopLeft"/>
-
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Name="SourceImagePath" Margin="10,10,0,10" HorizontalAlignment="Left" Width="270" IsReadOnly="True"/>
+                    <Button Content="..." Margin="10" HorizontalAlignment="Left" Width="30" Click="OpenSourceImageFolderButton_Click"/>
+                </StackPanel>
+                <Image Name="SourceImage" Source="/Images/ImageNotFound.jpg" Width="240" Height="240" Margin="20" VerticalAlignment="Top" Stretch="Fill"/>
+                <Slider Name="OriginSouceSlider" Margin="20" VerticalAlignment="Top" ValueChanged="SourceSlider_ValueChanged" TickPlacement="TopLeft" Cursor="Hand" SmallChange="1" AutoToolTipPlacement="TopLeft"/>
+            </StackPanel>
+            <Button Width="100" Height="60">
+                <TextBlock>Brain<LineBreak/>Tumor<LineBreak/>Predict</TextBlock>
+            </Button>
+            <StackPanel Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Name="ResultImagePath" Margin="10,10,0,10" HorizontalAlignment="Left" Width="270" IsReadOnly="True"/>
+                    <Button Content="..." Margin="10" HorizontalAlignment="Left" Width="30" Click="OpenResultImageFolderButton_Click"/>
+                </StackPanel>
+                <Image Name="ResultImage" Source="/Images/ImageNotFound.jpg" Width="240" Height="240" Margin="20" VerticalAlignment="Top" Stretch="Fill"/>
+                <Slider Name="ResultSouceSlider" Margin="20" VerticalAlignment="Top" ValueChanged="ResultSlider_ValueChanged" TickPlacement="TopLeft" Cursor="Hand" SmallChange="1" AutoToolTipPlacement="TopLeft"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
