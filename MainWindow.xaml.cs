@@ -36,7 +36,7 @@ namespace BrainTumorPredictViewer
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SourceImagePath.Text = Settings.Default.SourceImagePath;
+            SourceImagePath.Text = BrainTumorPredictViewer.Properties.Settings.Default.SourceImagePath;
 
             if (!string.IsNullOrEmpty(SourceImagePath.Text))
             {
@@ -67,6 +67,9 @@ namespace BrainTumorPredictViewer
 
         private void OpenResultImageFolderButton_Click(object sender, RoutedEventArgs e)
         {
+            //string startPath = "notepad.exe \"" + System.AppDomain.CurrentDomain.BaseDirectory + "111.txt\"";
+            //Process.Start(startPath);
+
             if (OpenFolderDialog(out string selectedPath) == CommonFileDialogResult.Ok)
             {
                 Debug.WriteLine(selectedPath);
