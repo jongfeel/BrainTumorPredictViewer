@@ -36,17 +36,22 @@ namespace BrainTumorPredictViewer
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SourceImagePath.Text = BrainTumorPredictViewer.Properties.Settings.Default.SourceImagePath;
-
-            if (!string.IsNullOrEmpty(SourceImagePath.Text))
+            if (!string.IsNullOrEmpty(Settings.Default.SourceImagePath) &&
+                Directory.Exists(Settings.Default.SourceImagePath))
             {
-                OriginSouceSlider.Maximum = LoadImages(SourceImagePath.Text, ref LoadedSourceImages, ref SourceImageInfo, ref SourceImage);
+                DirectoryInfo di = new DirectoryInfo(Settings.Default.SourceImagePath);
+                DirectoryInfo[] childDI = di.GetDirectories();
+                SourceImagePathComboBox.ItemsSource = childDI;
+                SourceImagePathComboBox.SelectedIndex = 0;
+
+                OriginSouceSlider.Maximum = LoadImages(childDI[0].FullName, ref LoadedSourceImages, ref SourceImageInfo, ref SourceImage);
             }
 
-            ResultImagePath.Text = Settings.Default.ResultImagePath;
-
-            if (!string.IsNullOrEmpty(ResultImagePath.Text))
+            if (!string.IsNullOrEmpty(ResultImagePath.Text) &&
+                File.Exists(Settings.Default.ResultImagePath))
             {
+                ResultImagePath.Text = Settings.Default.ResultImagePath;
+
                 ResultSouceSlider.Maximum = LoadImages(ResultImagePath.Text, ref LoadedResultImages, ref ResultImageInfo, ref ResultImage);
             }
         }
@@ -56,12 +61,23 @@ namespace BrainTumorPredictViewer
             if (OpenFolderDialog(out string selectedPath) == CommonFileDialogResult.Ok)
             {
                 Debug.WriteLine(selectedPath);
-                SourceImagePath.Text = selectedPath;
 
-                Settings.Default.SourceImagePath = selectedPath;
-                Settings.Default.Save();
+                DirectoryInfo di = new DirectoryInfo(selectedPath);
+                DirectoryInfo[] childDI = di.GetDirectories();
+                SourceImagePathComboBox.ItemsSource = childDI;
+                SourceImagePathComboBox.SelectedIndex = 0;
 
-                OriginSouceSlider.Maximum = LoadImages(selectedPath, ref LoadedSourceImages, ref SourceImageInfo, ref SourceImage);
+                if (childDI.Length > 0)
+                {
+                    Settings.Default.SourceImagePath = selectedPath;
+                    Settings.Default.Save();
+
+                    OriginSouceSlider.Maximum = LoadImages(childDI[0].FullName, ref LoadedSourceImages, ref SourceImageInfo, ref SourceImage);
+                }
+                else
+                {
+                    MessageBox.Show("이미지 폴더가 있는 상위 폴더를 선택해야 함");
+                }
             }
         }
 
@@ -92,7 +108,7 @@ namespace BrainTumorPredictViewer
                 IsFolderPicker = true
             };
             var result = dialog.ShowDialog();
-            selectPath = dialog.FileName;
+            selectPath = result == CommonFileDialogResult.Ok ? dialog.FileName : "";
             return result;
         }
 
@@ -144,6 +160,19 @@ namespace BrainTumorPredictViewer
                     ResultImage.Source = LoadedResultImages[(int)e.NewValue];
 
                     Debug.WriteLine(uriSource);
+                }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenFolderDialog(out string selectedPath) == CommonFileDialogResult.Ok)
+            {
+                DirectoryInfo di = new DirectoryInfo(selectedPath);
+                DirectoryInfo[] childDI = di.GetDirectories();
+                foreach (var item in childDI)
+                {
+                    Debug.WriteLine(item.Name);
                 }
             }
         }
