@@ -2,12 +2,12 @@
 
 ## Overview
 
-- TensorFlow¸¦ »ç¿ëÇÑ ³úÁ¾¾ç ¿¹Ãø ÇÁ·Î±×·¥ÀÇ ½Ã°¢È­
+- TensorFlowï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½È­
 
 ## Role
 
-- Á¤Àç¿ì: ±âÁ¸ ¸¸µé¾î µÐ ³úÁ¾¾ç ¿¹Ãø ÄÚµå ¹× Å×½ºÆ® ÀÌ¹ÌÁö ÁØºñ
-- ±èÁ¾ÇÊ: python ÆÄÀÏÀÇ ½ÇÇà ¹× Å×½ºÆ® ÀÌ¹ÌÁö ¹× ½ÇÇà °á°ú Æú´õ¿¡ ´ëÇÑ Viewer ÁØºñ
+- ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Øºï¿½
+- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: python ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Viewer ï¿½Øºï¿½
 
 ## Development Environment
 
@@ -15,22 +15,37 @@
 
 #### Python 3.6.5
 [https://www.python.org/downloads/release/python-365/](https://www.python.org/downloads/release/python-365/)
-#### pip 10.0.1
+
+#### pip check and upgrade 10.0.1
+
+``` python
+> python -m pip install --upgrade pip
 ```
-$ python -m pip install --upgrade pip
+
+#### Install TensorFlow 1.8.0
+
+``` python
+> pip install tensorflow
 ```
-#### tensorflow 1.8.0
-```
-$ pip install tensorflow
-```
-```
-$ python
+
+``` python
+> python
 > import tensorflow as tf
 > tf.__version__
 '1.8.0'
 ```
 
+#### Install numpy
+
+- Download whl: numpyâ€‘1.15.0rc1+mklâ€‘cp36â€‘cp36mâ€‘win_amd64.whl
+[https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy](https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy)
+
+``` python
+> pip install numpyâ€‘1.15.0rc1+mklâ€‘cp36â€‘cp36mâ€‘win_amd64.whl
+```
+
 ### Visual Studio Community 2017
+
 [https://www.visualstudio.com/downloads/](https://www.visualstudio.com/downloads/)
 
 ### .NET Desktop Environment
