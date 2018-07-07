@@ -35,13 +35,10 @@
 '1.8.0'
 ```
 
-#### Install numpy
-
-- Download whl: numpy‑1.15.0rc1+mkl‑cp36‑cp36m‑win_amd64.whl
-[https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy](https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy)
+#### Install OpenCV
 
 ``` python
-> pip install numpy‑1.15.0rc1+mkl‑cp36‑cp36m‑win_amd64.whl
+> pip install OpenCV-Python
 ```
 
 ### Visual Studio Community 2017
@@ -49,5 +46,6 @@
 [https://www.visualstudio.com/downloads/](https://www.visualstudio.com/downloads/)
 
 ### .NET Desktop Environment
+
 - WPF
 - .NET Framework 4.7.1
