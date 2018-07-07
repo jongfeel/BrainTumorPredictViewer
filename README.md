@@ -11,16 +11,11 @@
 
 ## Development Environment
 
-### Python & TensorFlow
+### Python & Anaconda & TensorFlow
 
-#### Python 3.6.5
-[https://www.python.org/downloads/release/python-365/](https://www.python.org/downloads/release/python-365/)
+#### Anaconda 5.2 with Python 3.5.5
 
-#### pip check and upgrade 10.0.1
-
-``` python
-> python -m pip install --upgrade pip
-```
+- Download link[https://www.anaconda.com/download/](https://www.anaconda.com/download/)
 
 #### Install TensorFlow 1.8.0
 
@@ -33,6 +28,37 @@
 > import tensorflow as tf
 > tf.__version__
 '1.8.0'
+```
+
+#### Activate tensorflow
+
+``` python
+(base)> activate tensorflow
+(tensorflow)>
+```
+
+#### pip check and upgrade 10.0.1
+
+``` python
+> python -m pip install --upgrade pip
+```
+
+#### Install matplotlib
+
+``` python
+> pip install matplotlib
+```
+
+#### Install tensor
+
+``` python
+> pip install tensor
+```
+
+#### Install tensorlayer
+
+``` python
+> pip install tensorlayer
 ```
 
 #### Install OpenCV
