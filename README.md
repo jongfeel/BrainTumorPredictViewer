@@ -2,12 +2,17 @@
 
 ## Overview
 
-- TensorFlow�� ����� ������ ���� ���α׷��� �ð�ȭ
+- TensorFlow를 사용한 뇌종양 예측 프로그램의 시각화
+ 
+ ## Role
+ 	 
+- 정재우: 기존 만들어 둔 뇌종양 예측 코드 및 테스트 이미지 준비
+- 김종필: python 파일의 실행 및 테스트 이미지 및 실행 결과 폴더에 대한 Viewer 준비
 
-## Role
+## To do
 
-- �����: ���� ����� �� ������ ���� �ڵ� �� �׽�Ʈ �̹��� �غ�
-- ������: python ������ ���� �� �׽�Ʈ �̹��� �� ���� ��� ������ ���� Viewer �غ�
+- python 실행 결과 log 출력
+- mha -> png 변환 작업을 위한 folder select UI
 
 ## Development Environment
 
