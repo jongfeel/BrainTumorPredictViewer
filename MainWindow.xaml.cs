@@ -43,6 +43,7 @@ namespace BrainTumorPredictViewer
                 DirectoryInfo[] childDI = di.GetDirectories();
                 SourceImagePathComboBox.ItemsSource = childDI;
                 SourceImagePathComboBox.SelectedIndex = 0;
+                SourceImagePathComboBox.SelectionChanged += SourceImagePathComboBox_SelectionChanged;
 
                 OriginSouceSlider.Maximum = LoadImages(childDI[0].FullName, ref LoadedSourceImages, ref SourceImageInfo, ref SourceImage);
             }
@@ -53,6 +54,19 @@ namespace BrainTumorPredictViewer
                 ResultImagePath.Text = Settings.Default.ResultImagePath;
 
                 ResultSouceSlider.Maximum = LoadImages(ResultImagePath.Text, ref LoadedResultImages, ref ResultImageInfo, ref ResultImage);
+            }
+        }
+
+        private void SourceImagePathComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Debug.WriteLine(e.AddedItems[0]);
+
+            DirectoryInfo di = (DirectoryInfo)e.AddedItems[0];
+            if (di != null)
+            {
+                OriginSouceSlider.Minimum = 0;
+                OriginSouceSlider.Maximum = LoadImages(di.FullName, ref LoadedSourceImages, ref SourceImageInfo, ref SourceImage);
+                OriginSouceSlider.Value = 0;
             }
         }
 
@@ -173,6 +187,36 @@ namespace BrainTumorPredictViewer
                 foreach (var item in childDI)
                 {
                     Debug.WriteLine(item.Name);
+                }
+            }
+        }
+
+        private void BTP_Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Process.Start("py.exe", "test.py \"C:/Test\"");
+
+            //var process = new Process
+            //{
+            //    StartInfo = new ProcessStartInfo()
+            //    {
+            //        FileName = "cmd.exe",
+            //        Arguments = "\"py.exe test.py \"C:/Test\"\""
+            //    }
+            //};
+            //process.Start();
+            //process.WaitForExit(5000);
+
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = "py.exe";
+            start.Arguments = string.Format("{0} {1}", "test.py", "C:/Test!!!!1");
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using (Process process = Process.Start(start))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    Console.Write(result);
                 }
             }
         }
